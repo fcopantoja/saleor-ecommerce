@@ -99,6 +99,7 @@ class Product(SeoModel):
         ProductType, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     description = models.TextField()
+    code = models.CharField(max_length=40, null=True, blank=True)
     category = models.ForeignKey(
         Category, related_name='products', on_delete=models.CASCADE)
     price = MoneyField(
@@ -221,7 +222,7 @@ class ProductVariant(models.Model):
         if not self.product.charge_taxes:
             taxes = None
         tax_rate = (
-            self.product.tax_rate or self.product.product_type.tax_rate)
+                self.product.tax_rate or self.product.product_type.tax_rate)
         return apply_tax_to_price(taxes, tax_rate, price)
 
     def get_absolute_url(self):
@@ -257,7 +258,7 @@ class ProductAttribute(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        ordering = ('slug', )
+        ordering = ('slug',)
 
     def __str__(self):
         return self.name
@@ -295,7 +296,7 @@ class ProductImage(SortableModel):
     alt = models.CharField(max_length=128, blank=True)
 
     class Meta:
-        ordering = ('sort_order', )
+        ordering = ('sort_order',)
         app_label = 'product'
 
     def get_ordering_queryset(self):
