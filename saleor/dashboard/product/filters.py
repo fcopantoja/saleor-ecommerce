@@ -4,6 +4,7 @@ from django_filters import (
     CharFilter, ChoiceFilter, ModelMultipleChoiceFilter, OrderingFilter,
     RangeFilter)
 
+from saleor.product.models import Quotation
 from ...core.filters import SortedFilterSet
 from ...product.models import Category, Product, ProductAttribute, ProductType
 from ..widgets import MoneyRangeWidget
@@ -17,6 +18,11 @@ PRODUCT_ATTRIBUTE_SORT_BY_FIELDS = {
 
 PRODUCT_TYPE_SORT_BY_FIELDS = {
     'name': pgettext_lazy('Product type list sorting option', 'name')}
+
+QUOTATION_SORT_BY_FIELDS = {
+    'user': pgettext_lazy('Quotation list sorting option', 'user'),
+    'created_on': pgettext_lazy('Created on list sorting option', 'created_on')
+}
 
 PUBLISHED_CHOICES = (
     ('1', pgettext_lazy('Is publish filter choice', 'Published')),
@@ -112,6 +118,25 @@ class ProductTypeFilter(SortedFilterSet):
         counter = self.qs.count()
         return npgettext(
             'Number of matching records in the dashboard product types list',
+            'Found %(counter)d matching product type',
+            'Found %(counter)d matching product types',
+            number=counter) % {'counter': counter}
+
+
+class QuotationFilter(SortedFilterSet):
+    sort_by = OrderingFilter(
+        label=pgettext_lazy('Quotation list filter label', 'Sort by'),
+        fields=QUOTATION_SORT_BY_FIELDS.keys(),
+        field_labels=QUOTATION_SORT_BY_FIELDS)
+
+    class Meta:
+        model = Quotation
+        fields = ['user']
+
+    def get_summary_message(self):
+        counter = self.qs.count()
+        return npgettext(
+            'Number of matching records in the dashboard quotation list',
             'Found %(counter)d matching product type',
             'Found %(counter)d matching product types',
             number=counter) % {'counter': counter}

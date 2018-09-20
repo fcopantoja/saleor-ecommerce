@@ -5999,3 +5999,11 @@ msgid ""
 "Sincerely,\n"
 "%(site_name)s\n"
 msgstr ""
+
+msgctxt "created_on"
+msgid "created_on"
+msgstr ""
+
+msgctxt "user"
+msgid "user"
+msgstr ""

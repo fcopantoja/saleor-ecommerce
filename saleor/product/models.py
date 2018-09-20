@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import HStoreField
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.urls import reverse
 from django.utils.encoding import smart_text
 from django.utils.text import slugify
@@ -23,6 +23,7 @@ from ..core.models import SortableModel
 from ..core.utils.taxes import DEFAULT_TAX_RATE_NAME, apply_tax_to_price
 from ..discount.utils import calculate_discounted_price
 from ..seo.models import SeoModel
+from ..account.models import User
 
 
 class Category(MPTTModel, SeoModel):
@@ -337,3 +338,24 @@ class Collection(SeoModel):
         return reverse(
             'product:collection',
             kwargs={'pk': self.id, 'slug': self.slug})
+
+
+class Quotation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def quantity(self):
+        _quantity = ProductVariantQuotation.objects. \
+            filter(quotation=self). \
+            aggregate(total=Sum('quantity'))
+
+        if _quantity:
+            return _quantity['total']
+
+        return 0
+
+
+class ProductVariantQuotation(models.Model):
+    quotation = models.ForeignKey(Quotation, on_delete=models.PROTECT)
+    variant = models.ForeignKey(ProductVariant, on_delete=models.PROTECT)
+    quantity = models.IntegerField(null=False)

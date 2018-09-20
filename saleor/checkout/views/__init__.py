@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
 
+from saleor.product.models import Quotation, ProductVariantQuotation
 from ...account.forms import LoginForm
 from ...core.utils import (
     format_money, get_user_shipping_country, to_local_currency)
@@ -90,6 +91,40 @@ def checkout_summary(request, cart):
     if request.user.is_authenticated:
         return summary_without_shipping(request, cart)
     return anonymous_summary_without_shipping(request, cart)
+
+
+@get_or_empty_db_cart(cart_queryset=Cart.objects.for_display())
+def request_quotation(request, cart):
+    cart_lines = []
+
+    try:
+        cart = Cart.objects.prefetch_related(
+            'lines__variant__product__category').get(pk=cart.pk)
+    except Cart.DoesNotExist:
+        pass
+
+    lines = cart.lines.select_related(
+        'variant__product__product_type',
+        'variant__product__category')
+    lines = lines.prefetch_related(
+        'variant__product__images',
+        'variant__product__product_type__variant_attributes')
+
+    quotation = Quotation.objects.create(user=request.user)
+
+    for line in lines:
+        cart_lines.append({
+            'variant': line.variant,
+            'get_price': line.variant.get_price(),
+            'get_total': line.get_total(),
+        })
+
+        ProductVariantQuotation.objects.create(
+            quotation=quotation, variant=line.variant,
+            quantity=line.quantity)
+
+    print(cart_lines)
+    print(cart)
 
 
 @get_or_empty_db_cart(cart_queryset=Cart.objects.for_display())

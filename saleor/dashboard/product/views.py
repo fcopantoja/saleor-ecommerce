@@ -8,6 +8,7 @@ from django.template.response import TemplateResponse
 from django.utils.translation import npgettext_lazy, pgettext_lazy
 from django.views.decorators.http import require_POST
 
+from saleor.product.models import Quotation
 from . import forms
 from ...core.utils import get_paginator_items
 from ...discount.models import Sale
@@ -18,7 +19,7 @@ from ...product.utils.availability import get_availability
 from ...product.utils.costs import (
     get_margin_for_variant, get_product_costs_data)
 from ..views import staff_member_required
-from .filters import ProductAttributeFilter, ProductFilter, ProductTypeFilter
+from .filters import ProductAttributeFilter, ProductFilter, ProductTypeFilter, QuotationFilter
 
 
 @staff_member_required
@@ -407,8 +408,8 @@ def ajax_available_variants_list(request):
         'product_type__product_attributes')
     queryset = ProductVariant.objects.filter(
         product__in=available_products).prefetch_related(
-            'product__category',
-            'product__product_type__product_attributes')
+        'product__category',
+        'product__product_type__product_attributes')
 
     search_query = request.GET.get('q', '')
     if search_query:
@@ -675,3 +676,14 @@ def ajax_reorder_attribute_choice_values(request, attribute_pk):
         status = 400
         ctx = {'error': form.errors}
     return JsonResponse(ctx, status=status)
+
+
+@staff_member_required
+def quotation_list(request):
+    quotations = Quotation.objects.all().order_by('-created_on')
+    quotation_filter = QuotationFilter(request.GET, queryset=quotations)
+    quotations = get_paginator_items(
+        quotation_filter.qs, settings.DASHBOARD_PAGINATE_BY,
+        request.GET.get('page'))
+    ctx = {'quotations': quotations, }
+    return TemplateResponse(request, 'dashboard/quotation/list.html', ctx)

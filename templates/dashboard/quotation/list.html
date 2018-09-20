@@ -1,0 +1,87 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% load materializecss %}
+{% load price from taxed_prices %}
+{% load product_first_image from product_images %}
+{% load staticfiles %}
+{% load utils %}
+
+{% block title %}
+  {% trans "Products" context "Dashboard products list" %} - {{ block.super }}
+{% endblock %}
+
+{% block body_class %}body-products-list{% endblock %}
+
+{% block menu_products_class %}active{% endblock %}
+
+
+{% block breadcrumbs %}
+  <ul class="breadcrumbs">
+    <li class="visible-s">
+      {% trans "Products" context "Dashboard products list" %}
+    </li>
+  </ul>
+{% endblock %}
+
+{% block menu_catalogue_class %} active{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col s12 l12" id="product-list">
+      {% if quotations %}
+        <div class="card">
+          <form method="POST" action="{% url 'dashboard:product-bulk-update' %}" novalidate id="bulk-actions-form">
+            {% csrf_token %}
+            <input name="action" type="hidden" id="bulk-action"/>
+            {% include 'dashboard/product/../includes/_bulk_actions_bar.html' %}
+            <div class="data-table-container">
+              <table class="bordered highlight responsive data-table last-right-align">
+                <thead>
+                <tr>
+                  <th class="bulk-checkbox">
+                    <input id="select-all-items" type="checkbox" class="filled-in select-all select-item">
+                    <label for="select-all-items"></label>
+                  </th>
+                  {% sorting_header 'user' label='Usuario' is_wide=False %}
+                  {% sorting_header 'created_on' label='Fecha de cotización' is_wide=False %}
+                  <th>{% trans "Numero de productos" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for quotation in quotations %}
+                  <tr class="avatar" data-action-go="">
+                    <td class="bulk-checkbox ignore-link">
+                      <input id="id_quotations_{{ quotation.pk }}" type="checkbox" name="quotation"
+                             value="{{ product.pk }}" class="filled-in select-item">
+                      <label for="id_quotations_{{ quotation.pk }}"></label>
+                    </td>
+                    <td>{{ quotation.user }}</td>
+                    <td>{{ quotation.created_on }}</td>
+                    <td>{{ quotation.quantity }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+        {% paginate quotations %}
+      {% else %}
+        {% if is_empty %}
+          {% include 'dashboard/product/zero_page.html' %}
+        {% else %}
+          <div class="col s12">
+            <div class="not-found">
+              <p class="grey-text">
+                {% trans "No products found." context "Empty product list message" %}
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+    {#    <div class="col s12 l3" id="filters">#}
+    {#      {% if not is_empty %}{% filters filter_set %}{% endif %}#}
+    {#    </div>#}
+  </div>
+{% endblock %}

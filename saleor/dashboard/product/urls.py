@@ -78,4 +78,8 @@ urlpatterns = [
         name='product-attribute-value-delete'),
     url(r'attributes/(?P<attribute_pk>[0-9]+)/values/reorder/$',
         views.ajax_reorder_attribute_choice_values,
-        name='product-attribute-values-reorder')]
+        name='product-attribute-values-reorder'),
+
+    url(r'quotations/$', views.quotation_list,
+        name='quotation-list'),
+]
