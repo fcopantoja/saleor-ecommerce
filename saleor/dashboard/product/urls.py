@@ -82,4 +82,6 @@ urlpatterns = [
 
     url(r'quotations/$', views.quotation_list,
         name='quotation-list'),
+    url(r'quotations/(?P<pk>[0-9]+)/$',
+        views.quotation_details, name='quotation-details'),
 ]

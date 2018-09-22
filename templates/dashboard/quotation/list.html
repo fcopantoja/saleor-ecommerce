@@ -7,23 +7,23 @@
 {% load utils %}
 
 {% block title %}
-  {% trans "Products" context "Dashboard products list" %} - {{ block.super }}
+  {% trans "Cotizaciones" context "Dashboard" %} - {{ block.super }}
 {% endblock %}
 
 {% block body_class %}body-products-list{% endblock %}
 
-{% block menu_products_class %}active{% endblock %}
+{% block quotations_class %}active{% endblock %}
 
 
 {% block breadcrumbs %}
   <ul class="breadcrumbs">
     <li class="visible-s">
-      {% trans "Products" context "Dashboard products list" %}
+      {% trans "Cotizaciones" %}
     </li>
   </ul>
 {% endblock %}
 
-{% block menu_catalogue_class %} active{% endblock %}
+{% block menu_catalogue_class %}active{% endblock %}
 
 {% block content %}
   <div class="row">
@@ -49,7 +49,7 @@
                 </thead>
                 <tbody>
                 {% for quotation in quotations %}
-                  <tr class="avatar" data-action-go="">
+                  <tr class="avatar" data-action-go="{% url 'dashboard:quotation-details' pk=quotation.pk %}">
                     <td class="bulk-checkbox ignore-link">
                       <input id="id_quotations_{{ quotation.pk }}" type="checkbox" name="quotation"
                              value="{{ product.pk }}" class="filled-in select-item">

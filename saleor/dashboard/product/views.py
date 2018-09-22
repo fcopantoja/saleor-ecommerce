@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 from django.utils.translation import npgettext_lazy, pgettext_lazy
 from django.views.decorators.http import require_POST
 
-from saleor.product.models import Quotation
+from saleor.product.models import Quotation, ProductVariantQuotation
 from . import forms
 from ...core.utils import get_paginator_items
 from ...discount.models import Sale
@@ -687,3 +687,13 @@ def quotation_list(request):
         request.GET.get('page'))
     ctx = {'quotations': quotations, }
     return TemplateResponse(request, 'dashboard/quotation/list.html', ctx)
+
+
+@staff_member_required
+def quotation_details(request, pk):
+    quotation = get_object_or_404(Quotation, id=pk)
+    ctx = {
+        'quotation': quotation,
+        'products': ProductVariantQuotation.objects.filter(quotation=quotation)
+    }
+    return TemplateResponse(request, 'dashboard/quotation/detail.html', ctx)
