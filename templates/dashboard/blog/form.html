@@ -59,6 +59,11 @@
                 <div class="row">
                   {{ form.content|materializecss }}
                 </div>
+
+                <div class="row">
+                  {{ form.image|materializecss }}
+                </div>
+
                 {% include "dashboard/includes/_google_preview.html" with object=category form=form %}
               </div>
             </div>

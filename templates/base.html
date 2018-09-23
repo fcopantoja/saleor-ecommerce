@@ -6,7 +6,8 @@
 {% load placeholder %}
 {% load translate_url from urls %}
 
-<html lang="{{ LANGUAGE_CODE }}" class="no-js" data-shipping-options-url="{% url 'cart:shipping-options' %}" data-cart-summary-url="{% url 'cart:summary' %}">
+<html lang="{{ LANGUAGE_CODE }}" class="no-js" data-shipping-options-url="{% url 'cart:shipping-options' %}"
+      data-cart-summary-url="{% url 'cart:summary' %}">
 <head>
   <title>{% block title %}{{ site.name }}{% endblock %}</title>
   {% block meta %}
@@ -21,7 +22,7 @@
     <meta name="og:type" content="website">
     {% get_available_languages as LANGUAGES %}
     {% for lang_code, language_name in LANGUAGES %}
-      <link rel="alternate" hreflang="{{ lang_code }}" href="{% translate_url url=request.path lang_code=lang_code %}" />
+      <link rel="alternate" hreflang="{{ lang_code }}" href="{% translate_url url=request.path lang_code=lang_code %}"/>
     {% endfor %}
   {% endblock meta %}
 
@@ -36,7 +37,7 @@
     <meta property="og:image" content="{% static "images/block1.png" %}">
   {% endblock meta_tags %}
 
-  <link rel="manifest" href="{% url "manifest" %}" />
+  <link rel="manifest" href="{% url "manifest" %}"/>
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -49,52 +50,57 @@
   <header class="navbar" role="navigation">
     <div class="navbar__login container-fluid {% if user.is_impersonate %} bg-warning{% endif %}">
       <div class=" d-none d-md-block container">
-      <div class="row">
-        <div class="col-6">
-          <p class="text-left">{{ site.settings.header_text }}</p>
-        </div>
-        <div class="col-6">
-          <ul class="float-right">
-            {% include "_language_picker.html" %}
-            {% if user.is_authenticated %}
-              {% if user.is_staff or request.impersonator.is_staff %}
-                <li>
-                  <a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-                    {% trans "Dashboard" context "Main navigation item" %}
-                  </a>
-                </li>
-              {% endif %}
+        <div class="row">
+          <div class="col-6">
+            <p class="text-left">{{ site.settings.header_text }}</p>
+          </div>
+          <div class="col-6">
+            <ul class="float-right">
+              {% include "_language_picker.html" %}
               <li>
-                <a href="{% url "account:details" %}">
-                  {% trans "Your account" context "Main navigation item" %}</a>
-              </li>
-              {% if user.is_impersonate %}
-                <li>
-                  <a href="{% url "impersonate-stop" %}">
-                    {% trans 'Stop impersonating' context 'Main navigation item' %}
-                  </a>
-                </li>
-              {% else %}
-                <li>
-                  <a href="{% url "account:logout" %}">
-                    {% trans "Log out" context "Main navigation item" %}</a>
-                </li>
-              {% endif %}
-            {% else %}
-              <li>
-                <a rel="nofollow" href="{% url "account:signup" %}">
-                  {% trans "Register" context "Main navigation item" %}</a>
-              </li>
-              <li>
-                <a rel="nofollow" href="{% url "account:login" %}">
-                  {% trans "Log in" context "Main navigation item" %}
+                <a href="{% url "blog:index" %}" target="_blank" rel="noopener">
+                  {% trans "Blog" context "Blog navigation item" %}
                 </a>
               </li>
-            {% endif %}
-          </ul>
+              {% if user.is_authenticated %}
+                {% if user.is_staff or request.impersonator.is_staff %}
+                  <li>
+                    <a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
+                      {% trans "Dashboard" context "Main navigation item" %}
+                    </a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a href="{% url "account:details" %}">
+                    {% trans "Your account" context "Main navigation item" %}</a>
+                </li>
+                {% if user.is_impersonate %}
+                  <li>
+                    <a href="{% url "impersonate-stop" %}">
+                      {% trans 'Stop impersonating' context 'Main navigation item' %}
+                    </a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="{% url "account:logout" %}">
+                      {% trans "Log out" context "Main navigation item" %}</a>
+                  </li>
+                {% endif %}
+              {% else %}
+                <li>
+                  <a rel="nofollow" href="{% url "account:signup" %}">
+                    {% trans "Register" context "Main navigation item" %}</a>
+                </li>
+                <li>
+                  <a rel="nofollow" href="{% url "account:login" %}">
+                    {% trans "Log in" context "Main navigation item" %}
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
     </div>
     <div class="navbar__brand container-fluid d-block">
       <div class="container">
@@ -105,7 +111,7 @@
               <span>{% trans "menu" context "Hamburger button text" %}</span>
             </div>
             <a href="{% url 'home' %}">
-              <img src="{% static "images/logo_gs.png" %}" height="55px" />
+              <img src="{% static "images/logo_gs.png" %}" height="55px"/>
             </a>
           </div>
           <div class="col-2 col-md-4 navbar__search static">

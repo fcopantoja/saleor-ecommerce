@@ -1,5 +1,8 @@
+import re
+
 from django.db import models
 from django.utils.translation import pgettext_lazy
+from versatileimagefield.fields import VersatileImageField
 
 from ..seo.models import SeoModel
 from ..account.models import User
@@ -11,6 +14,7 @@ class Post(SeoModel):
     content = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
+    image = VersatileImageField(upload_to='blog-images', blank=True, null=True)
 
     class Meta:
         app_label = 'blog'
@@ -22,6 +26,11 @@ class Post(SeoModel):
 
     def __str__(self):
         return self.title
+
+    def get_summary(self):
+        cleanr = re.compile('<.*?>')
+        clean_text = re.sub(cleanr, '', self.content)
+        return (clean_text[:300] + '...') if len(clean_text) > 300 else clean_text
 
     # def get_absolute_url(self, ancestors=None):
     #     return reverse('product:category',

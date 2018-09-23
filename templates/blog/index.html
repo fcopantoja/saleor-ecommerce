@@ -1,0 +1,40 @@
+{% extends "blog/blog_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block blog_content %}
+  <div class="row">
+    <div class="col-md-12 post">
+      <br>
+      {% for post in posts %}
+        <div class="row">
+          <div class="col-md-12">
+            <h4>
+              <strong><a href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html"
+                         class="post-title">{{ post.title }}</a></strong></h4>
+            <br>
+          </div>
+        </div>
+        <div class="row post-content">
+          <div class="col-md-3">
+            {% if post.image %}
+              <img src="{{ post.image.url }}" class="img-fluid">
+            {% endif %}
+          </div>
+          <div class="col-md-9">
+            <p>
+              {{ post.get_summary }}
+            </p>
+            <p>
+              <a class="btn btn-read-more"
+                 href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html">Leer más</a>
+            </p>
+          </div>
+        </div>
+        <hr>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

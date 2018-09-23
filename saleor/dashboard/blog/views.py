@@ -31,7 +31,7 @@ def post_list(request):
 @staff_member_required
 @permission_required('blog.edit_post')
 def post_create(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         post = form.save(commit=False)
         post.user = request.user

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-9">
+        {% block blog_content %}{% endblock %}
+      </div>
+      <div class="col-md-3">
+        <br>
+        <img src="https://dummyimage.com/600x400/000/fff" class="img-fluid">
+        <br>
+        <br>
+        <img src="https://dummyimage.com/600x400/000/2ff" class="img-fluid">
+        <br>
+        <br>
+        <img src="https://dummyimage.com/600x400/000/f3f" class="img-fluid">
+        <br>
+        <br>
+        <img src="https://dummyimage.com/600x400/000/1af" class="img-fluid">
+      </div>
+    </div>
+  </div>
+{% endblock %}

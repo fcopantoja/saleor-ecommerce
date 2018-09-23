@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.i18n import JavaScriptCatalog, set_language
 
 from .account.urls import urlpatterns as account_urls
+from .blog.urls import urlpatterns as blog_urls
 from .checkout.urls import (
     cart_urlpatterns as cart_urls, checkout_urlpatterns as checkout_urls)
 from .core.sitemaps import sitemaps
@@ -48,6 +49,7 @@ translatable_urlpatterns = [
     url(r'^feeds/',
         include((feed_urls, 'data_feeds'), namespace='data_feeds')),
     url(r'^search/', include((search_urls, 'search'), namespace='search')),
+    url(r'^blog/', include((blog_urls, 'blog'), namespace='blog')),
     url(r'', include('payments.urls'))]
 
 urlpatterns = non_translatable_urlpatterns + i18n_patterns(
@@ -55,11 +57,12 @@ urlpatterns = non_translatable_urlpatterns + i18n_patterns(
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-        # static files (images, css, javascript, etc.)
-        url(r'^static/(?P<path>.*)$', serve)] + static(
-            settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                       url(r'^__debug__/', include(debug_toolbar.urls)),
+                       # static files (images, css, javascript, etc.)
+                       url(r'^static/(?P<path>.*)$', serve)] + static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.ENABLE_SILK:
     urlpatterns += [

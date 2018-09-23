@@ -3,6 +3,7 @@
 {% load mptt_tags %}
 {% load materializecss %}
 {% load staticfiles %}
+{% load product_images %}
 {% load utils %}
 
 {% block title %}
@@ -56,6 +57,9 @@
               <tbody>
               {% for post in posts %}
                 <tr data-action-go="{% url 'dashboard:blog-post-edit' post.id %}">
+                  <td class="avatar">
+                    <img src="{% get_thumbnail post.image size="60x60" method="crop" %}">
+                  </td>
                   <td>
                     {{ post.title|truncatewords:8 }}
                   </td>
