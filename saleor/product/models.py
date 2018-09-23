@@ -359,3 +359,9 @@ class ProductVariantQuotation(models.Model):
     quotation = models.ForeignKey(Quotation, on_delete=models.PROTECT)
     variant = models.ForeignKey(ProductVariant, on_delete=models.PROTECT)
     quantity = models.IntegerField(null=False)
+
+
+class ProductRecommendation(models.Model):
+    primary = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='recommendations')
+    recommendation = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='precommendations')
+    ranking = models.IntegerField(null=False, default=0)

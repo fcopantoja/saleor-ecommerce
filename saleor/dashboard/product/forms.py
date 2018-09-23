@@ -10,6 +10,7 @@ from django.utils.translation import pgettext_lazy
 from django_prices_vatlayer.utils import get_tax_rate_types
 from mptt.forms import TreeNodeChoiceField
 
+from saleor.product.models import ProductRecommendation
 from . import ProductBulkAction
 from ...core.i18n import VAT_RATE_TYPE_TRANSLATIONS
 from ...core.utils.taxes import DEFAULT_TAX_RATE_NAME, include_taxes_in_prices
@@ -135,7 +136,7 @@ class ProductTypeForm(forms.ModelForm):
 
     def check_if_variants_changed(self, has_variants):
         variants_changed = (
-            self.fields['has_variants'].initial != has_variants)
+                self.fields['has_variants'].initial != has_variants)
         if variants_changed:
             query = self.instance.products.all()
             query = query.annotate(variants_counter=Count('variants'))
@@ -490,3 +491,15 @@ class ProductBulkUpdate(forms.Form):
 
     def _unpublish_products(self):
         self.cleaned_data['products'].update(is_published=False)
+
+
+class ProductRecommendationForm(forms.ModelForm, AttributesMixin):
+    model_attributes_field = 'attributes'
+
+    class Meta:
+        model = ProductRecommendation
+        fields = ['recommendation', 'ranking']
+        labels = {
+            'primary': pgettext_lazy('Product', 'Product'),
+            'recommendation': pgettext_lazy('Producto Recomendado', 'Producto Recomendado'),
+        }

@@ -127,6 +127,23 @@
             </ul>
           </li>
         {% endif %}
+        {% if perms.blog.view_post or perms.blog.edit_post %}
+          <li class="side-nav-section">
+            <p>
+              {% trans "Blog" context "Dashboard blog list" %}
+            </p>
+            <ul>
+              {% if perms.blog.view_post %}
+                <li class="{% block menu_blog_class %}{% endblock %}">
+                  <a href="{% url 'dashboard:post-list' %}">
+                    {% trans "Entradas" %}
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </li>
+        {% endif %}
+
         {% if perms.discount.view_sale or perms.discount.view_voucher %}
           <li class="side-nav-section">
             <p>

@@ -44,6 +44,9 @@ urlpatterns = [
     url(r'^ajax/variants/$',
         views.ajax_available_variants_list, name='ajax-available-variants'),
 
+    url(r'^(?P<product_pk>[0-9]+)/recommendation/add/$',
+        views.recommendation_create, name='recommendation-add'),
+
     url(r'^(?P<product_pk>[0-9]+)/images/$',
         views.product_images, name='product-image-list'),
     url(r'^(?P<product_pk>[0-9]+)/images/add/$',

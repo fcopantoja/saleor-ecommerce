@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 
 from . import views as core_views
+from .blog.urls import urlpatterns as blog_urls
 from .category.urls import urlpatterns as category_urls
 from .collection.urls import urlpatterns as collection_urls
 from .customer.urls import urlpatterns as customer_urls
@@ -18,6 +19,7 @@ from .taxes.urls import urlpatterns as taxes_urls
 
 urlpatterns = [
     url(r'^$', core_views.index, name='index'),
+    url(r'^blog/', include(blog_urls)),
     url(r'^categories/', include(category_urls)),
     url(r'^collections/', include(collection_urls)),
     url(r'^orders/', include(order_urls)),

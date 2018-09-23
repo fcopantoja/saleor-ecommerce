@@ -47,6 +47,7 @@ def product_details(request, pk):
     product = get_object_or_404(products, pk=pk)
     variants = product.variants.all()
     images = product.images.all()
+    recommendations = product.recommendations.all().order_by('-ranking')
     availability = get_availability(
         product, discounts=request.discounts, taxes=request.taxes)
     sale_price = availability.price_range_undiscounted
@@ -63,7 +64,8 @@ def product_details(request, pk):
         'discounted_price': discounted_price, 'variants': variants,
         'images': images, 'no_variants': no_variants,
         'only_variant': only_variant, 'purchase_cost': purchase_cost,
-        'margin': margin, 'is_empty': not variants.exists()}
+        'margin': margin, 'is_empty': not variants.exists(),
+        'recommendations': recommendations}
     return TemplateResponse(request, 'dashboard/product/detail.html', ctx)
 
 
@@ -335,6 +337,27 @@ def variant_create(request, product_pk):
         request,
         'dashboard/product/product_variant/form.html',
         ctx)
+
+
+@staff_member_required
+@permission_required('product.edit_product')
+def recommendation_create(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
+    form = forms.ProductRecommendationForm(
+        request.POST or None)
+    if form.is_valid():
+        recommendation = form.save(commit=False)
+        recommendation.primary = product
+        recommendation.save()
+        msg = pgettext_lazy(
+            'Dashboard message', 'Recomendacion creada')
+        messages.success(request, msg)
+        return redirect(
+            'dashboard:product-details', pk=product.pk)
+    ctx = {'form': form, 'product': product}
+    return TemplateResponse(
+        request,
+        'dashboard/product/product_recommendation/form.html', ctx)
 
 
 @staff_member_required
