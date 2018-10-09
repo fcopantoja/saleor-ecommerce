@@ -1,7 +1,10 @@
 """Cart and checkout related views."""
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
+from django.utils.translation import pgettext_lazy
 
 from saleor.product.models import Quotation, ProductVariantQuotation
 from ...account.forms import LoginForm
@@ -93,6 +96,7 @@ def checkout_summary(request, cart):
     return anonymous_summary_without_shipping(request, cart)
 
 
+@login_required
 @get_or_empty_db_cart(cart_queryset=Cart.objects.for_display())
 def request_quotation(request, cart):
     cart_lines = []
@@ -123,8 +127,16 @@ def request_quotation(request, cart):
             quotation=quotation, variant=line.variant,
             quantity=line.quantity)
 
-    print(cart_lines)
-    print(cart)
+    cart.quantity = 0
+    cart.save()
+    cart.lines.all().delete()
+
+    msg = pgettext_lazy(
+        'Impersonation message',
+        'Tu cotización ha sido enviada, te contactaremos a la brevedad')
+    messages.success(request, msg)
+
+    return redirect('/')
 
 
 @get_or_empty_db_cart(cart_queryset=Cart.objects.for_display())
