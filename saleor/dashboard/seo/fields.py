@@ -30,7 +30,7 @@ class SeoTitleField(forms.CharField):
             (
                 'Field name, ',
                 'Title that will be used to describe page in Search Engines'),
-            'Search engine title')
+            'Título search engine')
 
 
 class SeoDescriptionField(forms.CharField):
@@ -53,4 +53,4 @@ class SeoDescriptionField(forms.CharField):
             (
                 'Field name, description that will be used as a summary '
                 'in Search Engines'),
-            'Search engine description')
+            'Search engine descripción')

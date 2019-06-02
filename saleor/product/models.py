@@ -99,7 +99,7 @@ class Product(SeoModel):
     product_type = models.ForeignKey(
         ProductType, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
-    description = models.TextField()
+    description = models.TextField(verbose_name='Descripción')
     code = models.CharField(max_length=40, null=True, blank=True)
     category = models.ForeignKey(
         Category, related_name='products', on_delete=models.CASCADE)

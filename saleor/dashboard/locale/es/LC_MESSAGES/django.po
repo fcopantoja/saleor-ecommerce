@@ -2,7 +2,7 @@
 # Copyright (C) 2017 Mirumee Software
 # This file is distributed under the same license as the Saleor package.
 # Mirumee Software <hello@mirumee.com>, 2017.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -129,8 +129,8 @@ msgstr "Ordenar por"
 msgctxt "Number of matching records in the dashboard collections list"
 msgid "Found %(counter)d matching collection"
 msgid_plural "Found %(counter)d matching collections"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se encontraron %(counter)d coleccion que coinciden"
+msgstr[1] "Se encontraron %(counter)d colecciones que coinciden"
 
 #: saleor/dashboard/collection/forms.py:22
 msgctxt "Products selection"
@@ -1791,6 +1791,10 @@ msgctxt "Taxes list sorting form"
 msgid "Sort by"
 msgstr "Ordenar por"
 
+msgctxt "Taxes"
+msgid "Taxes"
+msgstr "Impuestos"
+
 #: saleor/dashboard/taxes/filters.py:45
 #, python-format
 msgctxt "Number of matching records in the dashboard taxes list"
@@ -1844,3 +1848,7 @@ msgstr "De"
 msgctxt "Label of second value in range filter"
 msgid "To"
 msgstr "Para"
+
+msgctxt "Title of the box showing preview from the search engine perspective"
+msgid "Search engine listing preview"
+msgstr "Vista previa SEO"

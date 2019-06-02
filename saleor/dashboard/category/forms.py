@@ -15,6 +15,9 @@ class CategoryForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.parent_pk = kwargs.pop('parent_pk')
         super().__init__(*args, **kwargs)
+        self.fields['description'].label = 'Descripción'
+        self.fields['background_image'].label = 'Imagen de fondo'
+
         self.fields['seo_description'] = SeoDescriptionField(
             extra_attrs={'data-bind': self['description'].auto_id})
         self.fields['seo_title'] = SeoTitleField(
@@ -25,7 +28,7 @@ class CategoryForm(forms.ModelForm):
         exclude = ['slug']
         labels = {
             'name': pgettext_lazy('Item name', 'Name'),
-            'description': pgettext_lazy('Description', 'Description')}
+            'description': pgettext_lazy('Description', 'Descripcion')}
 
     def save(self, commit=True):
         self.instance.slug = slugify(unidecode(self.instance.name))

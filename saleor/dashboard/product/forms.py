@@ -88,10 +88,11 @@ class ProductTypeForm(forms.ModelForm):
                 'Shipping toggle',
                 'Require shipping'),
             'tax_rate': pgettext_lazy(
-                'Product type tax rate type', 'Tax rate')}
+                'Product type tax rate type', 'Tasa de impuesto')}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['tax_rate'].label = 'Tasa de impuesto'
         self.fields['tax_rate'].choices = get_tax_rate_type_choices()
 
     def clean(self):
@@ -203,10 +204,12 @@ class ProductForm(forms.ModelForm, AttributesMixin):
         exclude = ['attributes', 'product_type', 'updated_at']
         labels = {
             'name': pgettext_lazy('Item name', 'Name'),
-            'description': pgettext_lazy('Description', 'Description'),
+            'description': 'Descripción',
+            'Description': 'Descripción',
+            'code': 'Código',
             'seo_description': pgettext_lazy(
                 'A SEO friendly description', 'SEO Friendly Description'),
-            'category': pgettext_lazy('Category', 'Category'),
+            'category': pgettext_lazy('Category', 'Category', 'Categoría'),
             'price': pgettext_lazy('Currency amount', 'Price'),
             'available_on': pgettext_lazy(
                 'Availability date', 'Publish product on'),
@@ -220,7 +223,7 @@ class ProductForm(forms.ModelForm, AttributesMixin):
             'charge_taxes': pgettext_lazy(
                 'Charge taxes on product', 'Charge taxes on this product'),
             'tax_rate': pgettext_lazy(
-                'Product tax rate type', 'Tax rate')}
+                'Product tax rate type', 'Tasa de impuesto')}
 
     category = TreeNodeChoiceField(queryset=Category.objects.all())
     collections = forms.ModelMultipleChoiceField(
@@ -232,6 +235,13 @@ class ProductForm(forms.ModelForm, AttributesMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         product_type = self.instance.product_type
+
+        #  Override labels
+        self.fields['collections'].label = 'Colecciones'
+        self.fields['category'].label = 'Categoría'
+        self.fields['tax_rate'].label = 'Tasa de impuesto'
+        self.fields['tax_rate'].label = 'Tasa de impuesto'
+
         self.initial['tax_rate'] = product_type.tax_rate
         self.available_attributes = (
             product_type.product_attributes.prefetch_related('values').all())

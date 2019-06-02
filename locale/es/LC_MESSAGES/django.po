@@ -2,7 +2,7 @@
 # Copyright (C) 2017 Mirumee Software
 # This file is distributed under the same license as the Saleor package.
 # Mirumee Software <hello@mirumee.com>, 2017.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -1394,7 +1394,7 @@ msgstr "Crea una cuenta"
 #: templates/base.html:63 templates/base.html:200
 msgctxt "Main navigation item"
 msgid "Dashboard"
-msgstr "Tablero de Control"
+msgstr "Dashboard"
 
 #: templates/base.html:74 templates/base.html:217
 msgctxt "Main navigation item"
@@ -2201,12 +2201,12 @@ msgstr "Nombre"
 #: templates/dashboard/collection/list.html:44
 msgctxt "Voucher table header"
 msgid "Number of products"
-msgstr ""
+msgstr "Número de productos"
 
 #: templates/dashboard/collection/list.html:47
 msgctxt "Collections list table header"
 msgid "Visibility"
-msgstr ""
+msgstr "Visibilidad"
 
 #: templates/dashboard/collection/list.html:59
 msgid "Products in collection:"
@@ -5135,7 +5135,7 @@ msgstr ""
 
 #: templates/dashboard/taxes/form.html:46
 msgid "Dashboard"
-msgstr "Tablero de Control"
+msgstr "Dashboard"
 
 #: templates/dashboard/taxes/form.html:54
 msgctxt "Dashboard site taxes settings form help text"

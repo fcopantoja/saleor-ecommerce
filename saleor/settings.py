@@ -56,7 +56,7 @@ DATABASES = {
 
 
 TIME_ZONE = 'America/Chicago'
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'es'
 LANGUAGES = [
     ('bg', _('Bulgarian')),
     ('cs', _('Czech')),
@@ -288,8 +288,8 @@ AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/account/login/'
 
-DEFAULT_COUNTRY = os.environ.get('DEFAULT_COUNTRY', 'US')
-DEFAULT_CURRENCY = os.environ.get('DEFAULT_CURRENCY', 'USD')
+DEFAULT_COUNTRY = os.environ.get('DEFAULT_COUNTRY', 'MX')
+DEFAULT_CURRENCY = os.environ.get('DEFAULT_CURRENCY', 'MXN')
 DEFAULT_DECIMAL_PLACES = get_currency_fraction(DEFAULT_CURRENCY)
 AVAILABLE_CURRENCIES = [DEFAULT_CURRENCY]
 COUNTRIES_OVERRIDE = {
