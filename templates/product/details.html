@@ -29,7 +29,7 @@
 
   {% product_first_image product size="510x510" as product_image %}
   {% if product_image %}
-    <meta property="og:image" content="{{ product_image }}" />
+    <meta property="og:image" content="{{ product_image }}"/>
     <meta property="og:image:width" content="510">
     <meta property="og:image:height" content="510">
   {% else %}
@@ -83,16 +83,17 @@
             </div>
             {% if images|length > 1 %}
               <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
-                <svg data-src="{% static "images/gallery-arrow.svg" %}" />
+                <svg data-src="{% static "images/gallery-arrow.svg" %}"/>
               </a>
               <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
-                <svg data-src="{% static "images/gallery-arrow.svg" %}" />
+                <svg data-src="{% static "images/gallery-arrow.svg" %}"/>
               </a>
             {% endif %}
             <ol class="carousel-indicators d-none d-md-block">
               {% for image in images %}
                 {% if images|length > 1 %}
-                  <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}>
+                  <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"
+                      {% if forloop.first %} class="active"{% endif %}>
                     <img data-src="{% get_thumbnail image.image method="crop" size="60x60" %}"
                          data-srcset="{% get_thumbnail image.image method="crop" size="60x60" %} 1x, {% get_thumbnail image.image method="crop" size="120x120" %} 2x"
                          alt=""
@@ -161,9 +162,11 @@
         {% block orderform %}
           {% if show_variant_picker %}
             {% csrf_token %}
-            <div id="variant-picker" data-variant-picker-data="{{ variant_picker_data }}" data-action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}"></div>
+            <div id="variant-picker" data-variant-picker-data="{{ variant_picker_data }}"
+                 data-action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}"></div>
           {% else %}
-            <form id="product-form" role="form" class="product-form clearfix" method="post" action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}" novalidate>
+            <form id="product-form" role="form" class="product-form clearfix" method="post"
+                  action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}" novalidate>
               {% csrf_token %}
               {% bootstrap_field form.variant %}
               <div class="product__info__quantity">
@@ -184,7 +187,8 @@
 
       {% else %}
         <p class="alert alert-warning">
-          {% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
+          {% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>
+            .{% endblocktrans %}
         </p>
       {% endif %}
       <div class="product__info__description">
@@ -201,6 +205,24 @@
           </tr>
         {% endfor %}
       </table>
+
     </div>
+
+    {% if product.recommendations.all %}
+      <div class="col-md-12 col-12 product__recommendation">
+        <h2>Productos Recomendados</h2>
+        <div class="row">
+          {% for item in product.recommendations.all %}
+            <div class="col-sm-2 col-xs-12 recommendation_item">
+              <a href="{{ item.recommendation.get_absolute_url }}">
+                <img src="{% get_thumbnail item.recommendation.get_first_image method="crop" size="120x120" %}"/>
+                {{ item.recommendation.name }}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
   </div>
 {% endblock content %}

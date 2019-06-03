@@ -4062,7 +4062,7 @@ msgstr "Precio neto"
 
 #: templates/dashboard/product/detail.html:113
 msgid "Margin"
-msgstr ""
+msgstr "Margen"
 
 #: templates/dashboard/product/detail.html:139
 msgid "Edit"
@@ -4077,13 +4077,13 @@ msgstr "No se encontraron variantes"
 #: templates/dashboard/product/product_variant/detail.html:79
 msgctxt "Product pricing card header"
 msgid "Pricing"
-msgstr ""
+msgstr "Precio"
 
 #: templates/dashboard/product/detail.html:164
 #, python-format
 msgctxt "Product pricing card header subtitle"
 msgid "Taxes are charged (%(tax_rate)s tax rate)"
-msgstr ""
+msgstr "Impuestos incluidos (tasa %(tax_rate)s)"
 
 #: templates/dashboard/product/detail.html:168
 msgctxt "Product pricing card header subtitle"
@@ -4094,7 +4094,7 @@ msgstr ""
 #: templates/dashboard/product/product_variant/detail.html:89
 msgctxt "Product field"
 msgid "Gross sale price"
-msgstr ""
+msgstr "Precio de venta bruto"
 
 #: templates/dashboard/product/detail.html:181
 #: templates/dashboard/product/product_variant/detail.html:91
@@ -4118,7 +4118,7 @@ msgstr ""
 #: templates/dashboard/product/product_variant/detail.html:115
 msgctxt "Product field"
 msgid "Gross purchase cost"
-msgstr ""
+msgstr "Costo bruto de compra"
 
 #: templates/dashboard/product/detail.html:207
 #: templates/dashboard/product/product_variant/detail.html:117
@@ -4130,13 +4130,13 @@ msgstr ""
 #: templates/dashboard/product/product_variant/detail.html:130
 msgctxt "Product field"
 msgid "Margin"
-msgstr ""
+msgstr "Margen"
 
 #: templates/dashboard/product/detail.html:239
 #: templates/dashboard/product/product_variant/detail.html:148
 msgctxt "Product variant inventory card header"
 msgid "Inventory"
-msgstr ""
+msgstr "Inventario"
 
 #: templates/dashboard/product/detail.html:248
 #: templates/dashboard/product/product_variant/detail.html:157
@@ -4561,7 +4561,7 @@ msgstr "Borrar variante"
 #: templates/dashboard/product/product_variant/detail.html:177
 msgctxt "Dashboard variant details view"
 msgid "Variant Images"
-msgstr ""
+msgstr "Imagenes variante"
 
 #: templates/dashboard/product/product_variant/detail.html:185
 msgid "No images"

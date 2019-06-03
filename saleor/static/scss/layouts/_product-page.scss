@@ -109,4 +109,16 @@
       text-transform: uppercase;
     }
   }
+  &__recommendation {
+    margin-top: 80px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+    .recommendation_item {
+      text-align: center;
+    }
+
+  }
+
 }

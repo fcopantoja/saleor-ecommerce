@@ -239,7 +239,7 @@ class ProductForm(forms.ModelForm, AttributesMixin):
         #  Override labels
         self.fields['collections'].label = 'Colecciones'
         self.fields['category'].label = 'Categoría'
-        self.fields['tax_rate'].label = 'Tasa de impuesto'
+        self.fields['description'].label = 'Descripción'
         self.fields['tax_rate'].label = 'Tasa de impuesto'
 
         self.initial['tax_rate'] = product_type.tax_rate
