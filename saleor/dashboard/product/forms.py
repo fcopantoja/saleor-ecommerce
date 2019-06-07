@@ -207,9 +207,14 @@ class ProductForm(forms.ModelForm, AttributesMixin):
             'description': 'Descripción',
             'Description': 'Descripción',
             'code': 'Código',
+            'show_price': 'Mostrar precio',
             'seo_description': pgettext_lazy(
                 'A SEO friendly description', 'SEO Friendly Description'),
             'category': pgettext_lazy('Category', 'Category', 'Categoría'),
+            'category2': 'Categoría 2',
+            'category3': 'Categoría 3',
+            'category4': 'Categoría 4',
+            'category5': 'Categoría 5',
             'price': pgettext_lazy('Currency amount', 'Price'),
             'available_on': pgettext_lazy(
                 'Availability date', 'Publish product on'),

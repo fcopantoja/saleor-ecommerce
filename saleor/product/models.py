@@ -101,8 +101,22 @@ class Product(SeoModel):
     name = models.CharField(max_length=128)
     description = models.TextField(verbose_name='Descripción')
     code = models.CharField(max_length=40, null=True, blank=True)
+
     category = models.ForeignKey(
         Category, related_name='products', on_delete=models.CASCADE)
+    category2 = models.ForeignKey(
+        Category, related_name='products2', on_delete=models.CASCADE,
+        null=True, blank=True)
+    category3 = models.ForeignKey(
+        Category, related_name='products3', on_delete=models.CASCADE,
+        null=True, blank=True)
+    category4 = models.ForeignKey(
+        Category, related_name='products4', on_delete=models.CASCADE,
+        null=True, blank=True)
+    category5 = models.ForeignKey(
+        Category, related_name='products5', on_delete=models.CASCADE,
+        null=True, blank=True)
+
     price = MoneyField(
         currency=settings.DEFAULT_CURRENCY, max_digits=12,
         decimal_places=settings.DEFAULT_DECIMAL_PLACES)
@@ -114,6 +128,7 @@ class Product(SeoModel):
     charge_taxes = models.BooleanField(default=True)
     tax_rate = models.CharField(
         max_length=128, default=DEFAULT_TAX_RATE_NAME, blank=True)
+    show_price = models.BooleanField(default=True)
 
     objects = ProductQuerySet.as_manager()
 

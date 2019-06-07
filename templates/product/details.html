@@ -124,38 +124,40 @@
         </p>
       {% endif %}
       {% if availability.available %}
-        {% if show_variant_picker %}
+        {% if show_variant_picker and product.show_price %}
           <div id="variant-price-component"></div>
         {% else %}
-          <h2 class="product__info__price">
-            <span>{% price_range availability.price_range %}</span>
-            {% if availability.discount %}
-              <small class="product__info__price__undiscounted">
-                {% price availability.price_range_undiscounted %}
-              </small>
-            {% endif %}
-            {% if availability.price_range_local_currency %}
-              <br>
-              <small class="text-info">
-                &asymp;
-                {% price availability.price_range_local_currency %}
-              </small>
-            {% endif %}
-            {% if request.taxes %}
-              <small>
-                {% tax_rate request.taxes product.tax_rate as tax_rate %}
-                {% if site.settings.display_gross_prices %}
-                  {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
-                    including {{ tax_rate }}% VAT
-                  {% endblocktrans %}
-                {% else %}
-                  {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
-                    excluding {{ tax_rate }}% VAT
-                  {% endblocktrans %}
-                {% endif %}
-              </small>
-            {% endif %}
-          </h2>
+          {% if product.show_price %}
+            <h2 class="product__info__price">
+              <span>{% price_range availability.price_range %}</span>
+              {% if availability.discount %}
+                <small class="product__info__price__undiscounted">
+                  {% price availability.price_range_undiscounted %}
+                </small>
+              {% endif %}
+              {% if availability.price_range_local_currency %}
+                <br>
+                <small class="text-info">
+                  &asymp;
+                  {% price availability.price_range_local_currency %}
+                </small>
+              {% endif %}
+              {% if request.taxes %}
+                <small>
+                  {% tax_rate request.taxes product.tax_rate as tax_rate %}
+                  {% if site.settings.display_gross_prices %}
+                    {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
+                      including {{ tax_rate }}% VAT
+                    {% endblocktrans %}
+                  {% else %}
+                    {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
+                      excluding {{ tax_rate }}% VAT
+                    {% endblocktrans %}
+                  {% endif %}
+                </small>
+              {% endif %}
+            </h2>
+          {% endif %}
         {% endif %}
       {% endif %}
       {% if is_visible and product.is_in_stock %}
@@ -195,6 +197,16 @@
         <h3>{% trans "Description" context "Product details title" %}</h3>
         <hr>
         {{ product.description|safe }}
+
+        <p class="product__info__conditions">
+          Nuestros precios se encuentran expresados en pesos (moneda nacional) y están sujetos a cambios sin previo
+          aviso.Precios más I.V.A. Nuestros precios no incluyen personalización de producto ya sea por impresión o
+          grabado salvo previo acuerdo con el cliente. En caso de requerir impresión o personalización de cualquier tipo
+          el cliente será responsable de proporcionar archivos de logotipo o imagen. No se aceptan cambios ni
+          devoluciones. Las entregas de mercancía son en nuestras oficinas, salvo previo acuerdo con el cliente.Los
+          tiempos de entrega empiezan a correr a partir de la confirmación de su pedido.
+
+        </p>
       </div>
       <hr>
       <table>

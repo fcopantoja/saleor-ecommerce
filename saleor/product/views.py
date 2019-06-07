@@ -1,6 +1,7 @@
 import datetime
 import json
 
+from django.db.models import Q
 from django.http import HttpResponsePermanentRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
@@ -120,7 +121,12 @@ def category_index(request, path, category_id):
     # Check for subcategories
     categories = category.get_descendants(include_self=True)
     products = products_with_details(user=request.user).filter(
-        category__in=categories).order_by('name')
+        Q(category__in=categories) |
+        Q(category2__in=categories) |
+        Q(category3__in=categories) |
+        Q(category4__in=categories) |
+        Q(category5__in=categories)
+    ).order_by('name')
     product_filter = ProductCategoryFilter(
         request.GET, queryset=products, category=category)
     ctx = get_product_list_context(request, product_filter)

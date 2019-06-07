@@ -158,13 +158,14 @@
     ul {
       list-style: none;
       margin-bottom: 0;
+      text-align: right;
       li {
         display: inline-block;
-        padding: 0 $global-padding / 2;
+        padding: 10px $global-padding / 2 10px;
         line-height: 1.9rem;
         a {
           color: $body-color;
-          font-size: 0.7rem;
+          font-size: 0.9rem;
           text-transform: uppercase;
         }
       }
@@ -213,7 +214,7 @@
     }
   }
   &__brand {
-    background-color: $light-gray;
+    background-color: #EB5757;
     @include media-breakpoint-down(sm) {
       position: fixed;
       top: 0;

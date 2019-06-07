@@ -63,6 +63,11 @@
         font-style: italic;
       }
     }
+    &__conditions {
+      font-size: 1rem;
+      color: $skull-gray;
+      margin-top: 2rem;
+    }
   }
   &__gallery {
     .carousel-control {
