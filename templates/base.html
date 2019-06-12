@@ -9,7 +9,7 @@
 <html lang="{{ LANGUAGE_CODE }}" class="no-js" data-shipping-options-url="{% url 'cart:shipping-options' %}"
       data-cart-summary-url="{% url 'cart:summary' %}">
 <head>
-  <title>{% block title %}{{ site.name }}{% endblock %}</title>
+  <title>{% block title %}GS{% endblock %}</title>
   {% block meta %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -213,10 +213,10 @@
             <img src="{% static "images/GS_logo.png" %}" height="60px"/>
           </a>
         </div>
-        <div class="col-md-3 col-sm-6">
-          {% menu site_menu=site.settings.bottom_menu %}
-        </div>
-        <div class="col-md-3 col-sm-6">
+{#        <div class="col-md-3 col-sm-6">#}
+{#          {% menu site_menu=site.settings.bottom_menu %}#}
+{#        </div>#}
+        <div class="col-md-6 col-sm-6">
           <ul>
             <li>
               <a rel="nofollow" href="{% url "cart:index" %}">
@@ -268,18 +268,27 @@
           </ul>
         </div>
         <div class="col-md-3 col-sm-12">
-          <a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
-            <svg data-src="{% static "images/facebook-logo.svg" %}" width="45px" height="45px"/>
-          </a>
-          <a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
-            <svg data-src="{% static "images/github-logo.svg" %}" width="45px" height="45px"/>
-          </a>
-          <a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
-            <svg data-src="{% static "images/twitter-logo.svg" %}" width="45px" height="45px"/>
-          </a>
-          <a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">
-            <svg data-src="{% static "images/google-logo.svg" %}" width="45px" height="45px"/>
-          </a>
+
+          Oficina de representación en China
+          <br>
+          Representante de Oficina: Wu Kai
+          <br>
+          Dirección: Add. No 998, Baoxiang Road, Shanghai, China.
+          <br>
+          wkai@dominio.com
+
+          {#          <a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">#}
+          {#            <svg data-src="{% static "images/facebook-logo.svg" %}" width="45px" height="45px"/>#}
+          {#          </a>#}
+          {#          <a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">#}
+          {#            <svg data-src="{% static "images/github-logo.svg" %}" width="45px" height="45px"/>#}
+          {#          </a>#}
+          {#          <a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">#}
+          {#            <svg data-src="{% static "images/twitter-logo.svg" %}" width="45px" height="45px"/>#}
+          {#          </a>#}
+          {#          <a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">#}
+          {#            <svg data-src="{% static "images/google-logo.svg" %}" width="45px" height="45px"/>#}
+          {#          </a>#}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
   <div class="home">
@@ -9,11 +10,11 @@
           <div class="home--content">
             <div class="home--content-wrapper">
               <div class="home--content-inner">
-{#                <h1>{% trans "Promo & Sale" context "Homepage title" %}</h1>#}
-{#                <h2>{% trans "from the Northpole" context "Homepage title" %}</h2>#}
-{#                  <a class="btn btn-secondary home__button" href="#">#}
-{#                    {% trans "Shop now" context "Homepage action" %}#}
-{#                  </a>#}
+                {#                <h1>{% trans "Promo & Sale" context "Homepage title" %}</h1>#}
+                {#                <h2>{% trans "from the Northpole" context "Homepage title" %}</h2>#}
+                {#                  <a class="btn btn-secondary home__button" href="#">#}
+                {#                    {% trans "Shop now" context "Homepage action" %}#}
+                {#                  </a>#}
               </div>
             </div>
           </div>
@@ -26,7 +27,7 @@
           <div class="home--content">
             <div class="home--content-wrapper">
               <div class="home--content-inner">
-{#                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>#}
+                {#                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>#}
               </div>
             </div>
           </div>
@@ -37,8 +38,8 @@
           <div class="home--content">
             <div class="home--content-wrapper">
               <div class="home--content-inner">
-{#                <h1>{% trans "Digital Downloads" context "Homepage title" %}</h1>#}
-{#                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>#}
+                {#                <h1>{% trans "Digital Downloads" context "Homepage title" %}</h1>#}
+                {#                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>#}
               </div>
             </div>
           </div>
@@ -53,6 +54,27 @@
         </div>
       </div>
     {% endif %}
+
+    <br/>
+    <br/>
+
+    <div class="home__featured text-center">
+      <h2 class="text-center">{% trans "Nuestros Clientes" context "Homepage title" %}</h2>
+      <div class="row">
+        <div class="col-12">
+          Numerosas empresas han confiado en nuestra calidad, infraestructura, seriedad y profesionalismo, por lo que
+          estamos orgullosos de trabajar con muchas de las empresas más relevantes y competitivas del país, nos
+          mantenemos a la altura de sus requerimientos y trabajamos en las relaciones a largo plazo.
+          <br/><br/>
+          Algunas de las empresas que han confiado en nosotros
+          <br/><br/>
+          <img src="{% static 'images/gs-clientes.jpeg' %}" style="max-width: 70%;"/>
+
+        </div>
+      </div>
+    </div>
+
+
     <script type="application/ld+json">{{ webpage_schema|safe }}</script>
   </div>
 {% endblock %}
