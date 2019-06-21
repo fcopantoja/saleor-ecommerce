@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+  <div class="home__featured text-center">
+    <h2 class="text-center">Contacto</h2>
+    <div class="row">
+      <div class="col-12">
+        <p>
+          Providencia 1259 Col del Valle, Del Benito Juárez, CDMX
+          <br>
+          Tel: 01 55 5235 6510
+          <br>
+          email: ventas@(dominiodelsitio)
+        </p>
+      </div>
+    </div>
+
+
+    <div class="container maincontent" style="min-height: 148px;">
+
+
+      <div class="col-lg-10 col-sm-12 m-auto">
+        <div class="row login">
+          <div class="col-md-12 login__form">
+            <h3>Contactanos</h3>
+
+
+            <form method="post" action="/es/account/login/" novalidate="">
+              <input type="hidden" name="csrfmiddlewaretoken"
+                     value="69bWVPCOLhFl6rQBULFPpIYLKU2Aa7d5zIm1gVW4j34bBgHYNaa93r5acq78YP2b">
+              <fieldset>
+                <div class="form-group">
+                  <label for="id_username">Nombre</label>
+                  <input type="text" name="username"
+                         maxlength="75" class="form-control"
+                         placeholder="" title=""
+                         required="" id="id_username"
+                         autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="id_username">Producto de interés y cantidad</label>
+                  <input type="text" name="username"
+                         maxlength="75" class="form-control"
+                         placeholder="" title=""
+                         required="" id="id_username"
+                         autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="id_username">Fecha de entrega requerida</label>
+                  <input type="text" name="username"
+                         maxlength="75" class="form-control"
+                         placeholder="" title=""
+                         required="" id="id_username"
+                         autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="id_username">Comentarios</label>
+                  <input type="text" name="username"
+                         maxlength="75" class="form-control"
+                         placeholder="" title=""
+                         required="" id="id_username"
+                         autocomplete="off">
+                </div>
+              </fieldset>
+              <div class="row login__btn-group">
+                <div class="col-sm-12">
+                  <button class="btn primary narrow">
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}

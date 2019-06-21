@@ -47,3 +47,15 @@ def handle_404(request, exception=None):
 def manifest(request):
     return TemplateResponse(
         request, 'manifest.json', content_type='application/json')
+
+
+def want_to_be_distributor(request):
+    return TemplateResponse(request, 'want_to_distribute.html')
+
+
+def who_we_are(request):
+    return TemplateResponse(request, 'who_we_are.html')
+
+
+def contact(request):
+    return TemplateResponse(request, 'contact.html')

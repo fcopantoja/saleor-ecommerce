@@ -12,4 +12,7 @@ urlpatterns = [
         name='impersonate-stop'),
     url(r'^404', views.handle_404, name='handle-404'),
     url(r'^manifest\.json$', views.manifest, name='manifest'),
+    url(r'^quiero-ser-distribuidor$', views.want_to_be_distributor, name='want_to_be_distributor'),
+    url(r'^quienes-somos', views.who_we_are, name='who_we_are'),
+    url(r'^contacto', views.contact, name='contact'),
 ]
