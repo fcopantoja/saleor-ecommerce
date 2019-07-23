@@ -21,6 +21,7 @@ def get_sort_by_url(context, field, descending=False):
 def menu(context, site_menu=None, horizontal=False):
     if not site_menu:
         return
+
     menus = context[NAVIGATION_CONTEXT_NAME]
     menu = next((menu for menu in menus if menu.pk == site_menu.pk), None)
     if not menu:
