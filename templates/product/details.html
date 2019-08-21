@@ -165,7 +165,9 @@
             <form id="product-form" role="form" class="product-form clearfix" method="post"
                   action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}" novalidate>
               {% csrf_token %}
-              {% bootstrap_field form.variant %}
+              {% if form.variant %}
+                {% bootstrap_field form.variant %}
+              {% endif %}
               <div class="product__info__quantity">
                 {% bootstrap_field form.quantity %}
               </div>
