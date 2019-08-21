@@ -225,8 +225,9 @@ class ProductVariant(models.Model):
         """ Check if there is at least the given quantity in stock
         if stock handling is enabled.
         """
-        if self.track_inventory and quantity > self.quantity_available:
-            raise InsufficientStock(self)
+        #if self.track_inventory and quantity > self.quantity_available:
+        #    raise InsufficientStock(self)
+        pass
 
     @property
     def base_price(self):

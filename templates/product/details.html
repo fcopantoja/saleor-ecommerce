@@ -160,13 +160,8 @@
           {% endif %}
         {% endif %}
       {% endif %}
-      {% if is_visible and product.is_in_stock %}
+      {% if is_visible %}
         {% block orderform %}
-          {% if show_variant_picker %}
-            {% csrf_token %}
-            <div id="variant-picker" data-variant-picker-data="{{ variant_picker_data }}"
-                 data-action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}"></div>
-          {% else %}
             <form id="product-form" role="form" class="product-form clearfix" method="post"
                   action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}" novalidate>
               {% csrf_token %}
@@ -181,17 +176,13 @@
                 </button>
               </div>
             </form>
-          {% endif %}
         {% endblock %}
         <div class="product__info__form-error">
           <small class="text-danger"></small>
         </div>
 
       {% else %}
-        <p class="alert alert-warning">
-          {% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>
-            .{% endblocktrans %}
-        </p>
+
       {% endif %}
       <div class="product__info__description">
         <h3>{% trans "Description" context "Product details title" %}</h3>

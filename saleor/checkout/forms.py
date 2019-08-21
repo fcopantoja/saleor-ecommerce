@@ -85,9 +85,9 @@ class AddToCartForm(forms.Form):
                 if remaining:
                     msg = self.error_messages['insufficient-stock']
                     self.add_error('quantity', msg % remaining)
-                else:
-                    msg = self.error_messages['empty-stock']
-                    self.add_error('quantity', msg)
+                #else:
+                #    msg = self.error_messages['empty-stock']
+                #    self.add_error('quantity', msg)
         return cleaned_data
 
     def save(self):
